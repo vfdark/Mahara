@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مهارة - منصة مشاركة المهارات | أكاديمية طويق</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body { background: #fef6ff; color: #333; line-height: 1.6; }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(8px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; padding: 0 1rem; }
+        nav .logo { font-weight: bold; font-size: 1.5rem; background: linear-gradient(90deg,#a4508b,#5f0a87); -webkit-background-clip: text; color: transparent; }
+        nav .nav-links { display: flex; gap: 1.5rem; }
+        nav .nav-links a { color: #555; font-weight: 500; transition: 0.3s; }
+        nav .nav-links a:hover { color: #a4508b; }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(90deg, #a4508b, #5f0a87);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+
+        .btn-secondary {
+            background: none;
+            border: 2px solid #a4508b;
+            color: #a4508b;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-secondary:hover { background: #f3e8ff; }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg,#f3e8ff,#e0c3fc);
+            padding: 2rem 1rem;
+            margin-top: 70px; /* space for navbar */
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg,#a4508b,#5f0a87);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+        .hero .buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+        /* Features Section */
+        .feature-section { padding: 6rem 1rem; text-align: center; }
+        .feature-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .feature-section h2 span { background: linear-gradient(90deg,#a4508b,#5f0a87); -webkit-background-clip: text; color: transparent; }
+        .feature-section p { margin-bottom: 3rem; color: #666; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 2rem; }
+        .feature-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .feature-title { font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .feature-desc { color: #555; }
+
+        /* Sessions Section */
+        .sessions { padding: 6rem 1rem; text-align: center; background: #fdf5ff; }
+        .sessions h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .sessions h2 span { background: linear-gradient(90deg,#a4508b,#5f0a87); -webkit-background-clip: text; color: transparent; }
+        .sessions p { margin-bottom: 3rem; color: #666; }
+        .sessions-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 2rem; }
+        .session-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .session-card:hover { transform: translateY(-10px); }
+        .session-image {
+            height: 150px;
+            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .session-content { padding: 1rem; text-align: center; }
+        .session-category { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; background: #f3e8ff; color: #a4508b; font-size: 0.8rem; margin-bottom: 0.5rem; }
+        .session-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .session-instructor { color: #555; font-size: 0.9rem; margin-bottom: 1rem; }
+        .session-info { display: flex; justify-content: space-around; color: #666; font-size: 0.85rem; }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 1rem;
+            text-align: center;
+            background: linear-gradient(135deg,#f3e8ff,#e0c3fc);
+            border-radius: 20px;
+            margin: 3rem auto;
+            max-width: 900px;
+        }
+        .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .cta-section p { color: #555; margin-bottom: 2rem; }
+
+        /* Footer */
+        footer {
+            background: #fff;
+            padding: 4rem 1rem;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="container">
+            <div class="logo">مهارة</div>
+            <div class="nav-links">
+                <a href="#features">المميزات</a>
+                <a href="#sessions">الجلسات</a>
+                <a href="#cta">ابدأ الآن</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>شارك <span>مهاراتك</span> <br> وتعلّم من الآخرين</h1>
+            <p>اكتشف جلسات تعليمية، ورش عمل، ومشاريع إبداعية. تواصل مع زملائك وابنِ مستقبلك التقني معنا.</p>
+            <div class="buttons">
+                <a href="@Url.Action("Login", "Home")" class="btn-primary">أنشئ حسابك مجاناً</a>
+                <button class="btn-secondary">استكشف الجلسات</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="feature-section" id="features">
+        <div class="container">
+            <h2>كل ما تحتاجه <span>للتعلّم</span></h2>
+            <p>منصة متكاملة تجمع بين التعليم التفاعلي والمجتمع الداعم لتحقيق أهدافك</p>
+            <div class="features-grid">
+                <div class="feature-card"><div class="feature-icon">📖</div><div class="feature-title">جلسات تعليمية</div><div class="feature-desc">انضم لجلسات مباشرة مع خبراء في البرمجة والتصميم والتقنية</div></div>
+                <div class="feature-card"><div class="feature-icon">👥</div><div class="feature-title">مجتمع متفاعل</div><div class="feature-desc">تواصل مع زملائك من طلاب الأكاديمية وشارك تجاربك</div></div>
+                <div class="feature-card"><div class="feature-icon">🏆</div><div class="feature-title">تتبع التقدم</div><div class="feature-desc">احصل على شارات وإنجازات عند إكمال الجلسات والمشاريع</div></div>
+                <div class="feature-card"><div class="feature-icon">📅</div><div class="feature-title">جدولة ذكية</div><div class="feature-desc">نظّم جلساتك بسهولة واحصل على تذكيرات تلقائية</div></div>
+                <div class="feature-card"><div class="feature-icon">💬</div><div class="feature-title">دردشة فورية</div><div class="feature-desc">تواصل مباشر مع المعلمين والطلاب أثناء الجلسات</div></div>
+                <div class="feature-card"><div class="feature-icon">🚀</div><div class="feature-title">مشاريع تطبيقية</div><div class="feature-desc">طبّق ما تعلمته في مشاريع حقيقية مع فريقك</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sessions -->
+    <section class="sessions" id="sessions">
+        <div class="container">
+            <h2>جلسات <span>مميزة</span></h2>
+            <p>اكتشف أحدث الجلسات التعليمية من أفضل المعلمين في المجتمع</p>
+            <div class="sessions-grid">
+                <div class="session-card">
+                    <div class="session-image" style="background: linear-gradient(90deg,#3b82f6,#06b6d4);">🚀</div>
+                    <div class="session-content">
+                        <span class="session-category">برمجة</span>
+                        <div class="session-title">أساسيات React للمبتدئين</div>
+                        <div class="session-instructor">بواسطة أحمد العمري</div>
+                        <div class="session-info">
+                            <div>2 ساعة</div>
+                            <div>24 مشارك</div>
+                            <div>⭐ 4.9</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="session-card">
+                    <div class="session-image" style="background: linear-gradient(90deg,#ec4899,#f43f5e);">🎨</div>
+                    <div class="session-content">
+                        <span class="session-category">تصميم</span>
+                        <div class="session-title">تصميم واجهات المستخدم UI/UX</div>
+                        <div class="session-instructor">بواسطة سارة الخالد</div>
+                        <div class="session-info">
+                            <div>1.5 ساعة</div>
+                            <div>18 مشارك</div>
+                            <div>⭐ 4.8</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="session-card">
+                    <div class="session-image" style="background: linear-gradient(90deg,#8b5cf6,#9333ea);">🤖</div>
+                    <div class="session-content">
+                        <span class="session-category">AI</span>
+                        <div class="session-title">الذكاء الاصطناعي وتطبيقاته</div>
+                        <div class="session-instructor">بواسطة محمد السعيد</div>
+                        <div class="session-info">
+                            <div>3 ساعات</div>
+                            <div>32 مشارك</div>
+                            <div>⭐ 5.0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="session-card">
+                    <div class="session-image" style="background: linear-gradient(90deg,#10b981,#14b8a6);">📱</div>
+                    <div class="session-content">
+                        <span class="session-category">تطوير</span>
+                        <div class="session-title">بناء تطبيقات الموبايل</div>
+                        <div class="session-instructor">بواسطة نورة الحربي</div>
+                        <div class="session-info">
+                            <div>2.5 ساعة</div>
+                            <div>15 مشارك</div>
+                            <div>⭐ 4.7</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="cta">
+        <h2>جاهز لمشاركة مهاراتك؟</h2>
+        <p>انضم لمجتمع مهارة واستفد من خبرات الآخرين أو شارك معرفتك وساعد غيرك على التعلم</p>
+        <div class="buttons">
+            <button class="btn-primary">أنشئ حسابك مجاناً</button>
+            <button class="btn-secondary">تعرف على المزيد</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 مهارة. جميع الحقوق محفوظة.</p>
+        <p>صُنع بـ ❤️ لمجتمع طويق</p>
+    </footer>
+
+</body>
+</html>

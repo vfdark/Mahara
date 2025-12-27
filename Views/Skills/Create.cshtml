@@ -1,0 +1,17 @@
+@model Mahara.Models.Skill
+
+@{
+    ViewData["Title"] = "إضافة مهارة";
+}
+
+<h1 class="page-title">إضافة مهارة جديدة</h1>
+
+<form asp-action="Create" method="post">
+    <label>اسم المهارة</label>
+    <input asp-for="Name" placeholder="اكتب اسم المهارة" />
+    
+    <label>التصنيف</label>
+    <input asp-for="Category" placeholder="مثلاً: Tech / Design / Soft Skills" />
+    
+    <button type="submit" class="btn btn-add">حفظ</button>
+</form>

@@ -1,0 +1,23 @@
+@model IEnumerable<Mahara.Models.Skill>
+
+@{
+    ViewData["Title"] = "المهارات";
+}
+
+<h1 class="page-title">المهارات</h1>
+
+<div class="skills-grid">
+    @foreach (var skill in Model)
+    {
+        <div class="card">
+            <h3>@skill.Name</h3>
+            <p>التصنيف: @skill.Category</p>
+            <div class="card-actions">
+                <a href="@Url.Action("Edit", "Skills", new { id = skill.Id })" class="btn">تعديل</a>
+                <a href="@Url.Action("Delete", "Skills", new { id = skill.Id })" class="btn btn-delete">حذف</a>
+            </div>
+        </div>
+    }
+</div>
+
+<a href="@Url.Action("Create", "Skills")" class="btn btn-add">إضافة مهارة جديدة</a>

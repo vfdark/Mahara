@@ -1,0 +1,19 @@
+@model Mahara.Models.Skill
+
+@{
+    ViewData["Title"] = "تعديل المهارة";
+}
+
+<h1 class="page-title">تعديل المهارة</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    
+    <label>اسم المهارة</label>
+    <input asp-for="Name" />
+    
+    <label>التصنيف</label>
+    <input asp-for="Category" />
+    
+    <button type="submit" class="btn btn-add">حفظ التعديلات</button>
+</form>

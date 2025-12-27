@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using Mahara.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -6,144 +11,49 @@
     <title>مهارة - منصة مشاركة المهارات | أكاديمية طويق</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
         body { background: #fef6ff; color: #333; line-height: 1.6; }
-
         a { text-decoration: none; color: inherit; }
-
-        /* Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255,255,255,0.9);
-            backdrop-filter: blur(8px);
-            padding: 1rem 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            z-index: 1000;
-        }
+        nav { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); padding: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.05); z-index: 1000; }
         nav .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; padding: 0 1rem; }
         nav .logo { font-weight: bold; font-size: 1.5rem; background: linear-gradient(90deg,#a4508b,#5f0a87); -webkit-background-clip: text; color: transparent; }
-        nav .nav-links { display: flex; gap: 1.5rem; }
+        nav .nav-links { display: flex; gap: 1rem; }
         nav .nav-links a { color: #555; font-weight: 500; transition: 0.3s; }
         nav .nav-links a:hover { color: #a4508b; }
-
-        /* Buttons */
-        .btn-primary {
-            background: linear-gradient(90deg, #a4508b, #5f0a87);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+        .btn-primary { background: linear-gradient(90deg, #a4508b, #5f0a87); color: white; padding: 0.75rem 1.5rem; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-primary:hover { opacity: 0.9; }
-
-        .btn-secondary {
-            background: none;
-            border: 2px solid #a4508b;
-            color: #a4508b;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+        .btn-secondary { background: none; border: 2px solid #a4508b; color: #a4508b; padding: 0.75rem 1.5rem; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-secondary:hover { background: #f3e8ff; }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg,#f3e8ff,#e0c3fc);
-            padding: 2rem 1rem;
-            margin-top: 70px; /* space for navbar */
-        }
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg,#a4508b,#5f0a87);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #555;
-        }
+        .hero { min-height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg,#f3e8ff,#e0c3fc); padding: 2rem 1rem; margin-top: 70px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(90deg,#a4508b,#5f0a87); -webkit-background-clip: text; color: transparent; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; color: #555; }
         .hero .buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-
-        /* Features Section */
         .feature-section { padding: 6rem 1rem; text-align: center; }
         .feature-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
         .feature-section h2 span { background: linear-gradient(90deg,#a4508b,#5f0a87); -webkit-background-clip: text; color: transparent; }
         .feature-section p { margin-bottom: 3rem; color: #666; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 2rem; }
-        .feature-card {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: 0.3s;
-        }
+        .feature-card { background: #fff; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: 0.3s; }
         .feature-card:hover { transform: translateY(-10px); }
         .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
         .feature-title { font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem; }
         .feature-desc { color: #555; }
-
-        /* Sessions Section */
         .sessions { padding: 6rem 1rem; text-align: center; background: #fdf5ff; }
         .sessions h2 { font-size: 2.5rem; margin-bottom: 1rem; }
         .sessions h2 span { background: linear-gradient(90deg,#a4508b,#5f0a87); -webkit-background-clip: text; color: transparent; }
         .sessions p { margin-bottom: 3rem; color: #666; }
         .sessions-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 2rem; }
-        .session-card {
-            background: #fff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: 0.3s;
-        }
+        .session-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: 0.3s; }
         .session-card:hover { transform: translateY(-10px); }
-        .session-image {
-            height: 150px;
-            font-size: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
+        .session-image { height: 150px; font-size: 3rem; display: flex; align-items: center; justify-content: center; color: white; }
         .session-content { padding: 1rem; text-align: center; }
         .session-category { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; background: #f3e8ff; color: #a4508b; font-size: 0.8rem; margin-bottom: 0.5rem; }
         .session-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem; }
         .session-instructor { color: #555; font-size: 0.9rem; margin-bottom: 1rem; }
         .session-info { display: flex; justify-content: space-around; color: #666; font-size: 0.85rem; }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 6rem 1rem;
-            text-align: center;
-            background: linear-gradient(135deg,#f3e8ff,#e0c3fc);
-            border-radius: 20px;
-            margin: 3rem auto;
-            max-width: 900px;
-        }
+        .cta-section { padding: 6rem 1rem; text-align: center; background: linear-gradient(135deg,#f3e8ff,#e0c3fc); border-radius: 20px; margin: 3rem auto; max-width: 900px; }
         .cta-section h2 { font-size: 2rem; margin-bottom: 1rem; }
         .cta-section p { color: #555; margin-bottom: 2rem; }
-
-        /* Footer */
-        footer {
-            background: #fff;
-            padding: 4rem 1rem;
-            text-align: center;
-            color: #666;
-        }
+        footer { background: #fff; padding: 4rem 1rem; text-align: center; color: #666; }
     </style>
 </head>
 <body>
@@ -156,6 +66,16 @@
                 <a href="#features">المميزات</a>
                 <a href="#sessions">الجلسات</a>
                 <a href="#cta">ابدأ الآن</a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a href="#">مرحبا @User.Identity?.Name</a>
+                    <a href="@Url.Action("Logout", "Account")">تسجيل الخروج</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Login", "Account")">تسجيل الدخول</a>
+                    <a href="@Url.Action("Register", "Account")">انشاء حساب</a>
+                }
             </div>
         </div>
     </nav>
@@ -166,8 +86,8 @@
             <h1>شارك <span>مهاراتك</span> <br> وتعلّم من الآخرين</h1>
             <p>اكتشف جلسات تعليمية، ورش عمل، ومشاريع إبداعية. تواصل مع زملائك وابنِ مستقبلك التقني معنا.</p>
             <div class="buttons">
-                <a href="@Url.Action("Login", "Home")" class="btn-primary">أنشئ حسابك مجاناً</a>
-                <button class="btn-secondary">استكشف الجلسات</button>
+                <a href="@Url.Action("Register", "Account")" class="btn-primary">أنشئ حسابك مجاناً</a>
+                <a href="@Url.Action("Login", "Account")" class="btn-secondary">تسجيل الدخول</a>
             </div>
         </div>
     </section>
@@ -255,8 +175,8 @@
         <h2>جاهز لمشاركة مهاراتك؟</h2>
         <p>انضم لمجتمع مهارة واستفد من خبرات الآخرين أو شارك معرفتك وساعد غيرك على التعلم</p>
         <div class="buttons">
-            <button class="btn-primary">أنشئ حسابك مجاناً</button>
-            <button class="btn-secondary">تعرف على المزيد</button>
+            <a href="@Url.Action("Register", "Account")" class="btn-primary">أنشئ حسابك مجاناً</a>
+            <a href="@Url.Action("Login", "Account")" class="btn-secondary">تسجيل الدخول</a>
         </div>
     </section>
 

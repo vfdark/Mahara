@@ -1,0 +1,9 @@
+@model List<Mahara.Models.Skill>
+
+<h2>Skills in database:</h2>
+<ul>
+@foreach(var skill in Model)
+{
+    <li>@skill.Name (@skill.Category)</li>
+}
+</ul>

@@ -1,0 +1,65 @@
+@{
+    ViewBag.Title = "لوحة التحكم";
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة التحكم - مهارة</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#fef6ff; margin:0; }
+        nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); padding: 1rem; display:flex; justify-content: space-between; }
+        nav a { color:#555; margin-left:1rem; font-weight:500; text-decoration:none; }
+        nav a:hover { color:#a4508b; }
+        header { padding:2rem; text-align:center; }
+        header h1 { background: linear-gradient(90deg,#a4508b,#5f0a87); -webkit-background-clip: text; color:transparent; }
+        .container { display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:2rem; padding:2rem; }
+        .card { background:white; border-radius:20px; box-shadow:0 10px 25px rgba(0,0,0,0.05); padding:2rem; text-align:center; transition:0.3s; }
+        .card:hover { transform:translateY(-10px); }
+        button { background: linear-gradient(90deg,#a4508b,#5f0a87); color:white; border:none; padding:0.75rem 1.5rem; border-radius:12px; cursor:pointer; font-weight:bold; }
+        button:hover { opacity:0.9; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">مهارة</div>
+        <div>
+            <a href="/Home/Profile">الملف الشخصي</a>
+            <a href="/Home/Settings">الإعدادات</a>
+            <a href="/Account/Logout">تسجيل الخروج</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>مرحبا بك، @User.Identity.Name!</h1>
+        <p>لوحة التحكم الخاصة بك لمشاركة ومتابعة مهاراتك</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>مهارتك الحالية</h2>
+            <p>@ViewBag.UserSkill</p>
+            <a href="/Home/AddSkill"><button>إضافة / تعديل مهارة</button></a>
+        </div>
+
+        <div class="card">
+            <h2>الإحصائيات</h2>
+            <p>عدد المشاريع النشطة: 35</p>
+            <p>عدد المشاركين: 120</p>
+        </div>
+
+        <div class="card">
+            <h2>إشعارات</h2>
+            <p>رسالة جديدة من الإدارة</p>
+            <p>موعد نهائي قريب</p>
+        </div>
+
+        <div class="card">
+            <h2>إجراءات سريعة</h2>
+            <a href="/Home/Profile">تعديل الملف الشخصي</a><br>
+            <a href="/Home/Settings">تغيير الإعدادات</a>
+        </div>
+    </div>
+</body>
+</html>

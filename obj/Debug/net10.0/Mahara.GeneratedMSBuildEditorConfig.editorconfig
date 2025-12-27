@@ -30,6 +30,18 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
+[/Users/rahafdev/Mahara/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/rahafdev/Mahara/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/rahafdev/Mahara/Views/Home/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9EYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/rahafdev/Mahara/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -40,6 +52,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/rahafdev/Mahara/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/rahafdev/Mahara/Views/Home/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/rahafdev/Mahara/Views/Shared/Error.cshtml]
@@ -68,6 +84,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/rahafdev/Mahara/Views/Skills/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2tpbGxzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/rahafdev/Mahara/Views/TestDb.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGVzdERiLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/rahafdev/Mahara/Views/_ViewImports.cshtml]

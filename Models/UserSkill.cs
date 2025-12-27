@@ -4,12 +4,10 @@ namespace Mahara.Models
     {
         public int Id { get; set; }
 
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public ApplicationUser User { get; set; } = null!;
 
         public int SkillId { get; set; }
-        public Skill Skill { get; set; }
-
-        public string Level { get; set; } // Beginner / Intermediate / Advanced
+        public Skill Skill { get; set; } = null!;
     }
 }
